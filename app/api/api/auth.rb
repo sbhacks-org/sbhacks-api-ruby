@@ -6,7 +6,7 @@ module API
         requires :username, type: String
         requires :password, type: String
       end
-      post do
+      post auth: false do
         session.destroy
 
         user = User.find_by(email: params[:username])
@@ -14,6 +14,7 @@ module API
         error! :not_found, 404 unless user.try(:authenticate, params[:password])
 
         session[:user_id] = user.id
+        cookies[:_csrf_token] = session[:csrf_token] = SecureRandom.base64(32)
 
         status :ok
         {}
