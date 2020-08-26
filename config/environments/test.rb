@@ -3,6 +3,10 @@
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
 
+# Tell Ruby to shut up about deprecation warnings during tests
+# https://fuzzyblog.io/blog/rails/2020/01/28/turning-off-ruby-deprecation-warnings-when-running-tests.html
+$VERBOSE = nil
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
